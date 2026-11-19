@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#fffdf9">
+  <meta name="description" content="Explore Clayfold’s collection of stoneware cups, tableware and vases. Build a cart and see the full cost in a demonstration checkout.">
+  <title>Clayfold — Everyday stoneware</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="shop.js" defer></script>
+</head>
+<body id="top">
+  <a class="skip-link" href="#collection">Skip to collection</a>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="wordmark" href="#top" aria-label="Clayfold home"><span class="clay-mark" aria-hidden="true"><i></i><i></i><i></i></span>Clayfold</a>
+      <div class="header-actions">
+        <span class="delivery-hint">Free delivery from ₹500</span>
+        <button type="button" id="open-cart" class="bag-button" aria-haspopup="dialog" aria-label="Open cart, 0 items">
+          <span class="bag-icon" aria-hidden="true"></span>Cart <span id="cart-count" class="bag-count">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <h1 id="hero-title">Everyday<br><em>stoneware.</em></h1>
+        <p>Cups, tableware and vases in earthy glazes.</p>
+        <a class="hero-link" href="#collection">Browse the collection</a>
+      </div>
+      <img class="hero-image" src="images/studio.webp" width="1536" height="1024" alt="An ivory vase, a brown bowl and an ochre mug on a sunlit studio table." fetchpriority="high">
+    </section>
+
+    <section class="collection" id="collection" aria-labelledby="collection-title">
+      <div class="collection-bar">
+        <div class="collection-heading">
+          <h2 id="collection-title">The collection</h2>
+          <span id="piece-count" aria-live="polite"></span>
+        </div>
+        <div id="filters" class="filters" role="group" aria-label="Filter pieces by category"></div>
+      </div>
+      <div class="product-grid" id="catalogue"></div>
+      <noscript>Enable JavaScript to browse the collection and use your cart.</noscript>
+    </section>
+  </main>
+
+  <footer class="wrap footer"><span class="footer-brand">Clayfold</span><span>Demo shop for InternCircle Project 05</span></footer>
+  <div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+
+  <dialog id="cart-dialog" aria-labelledby="cart-title">
+    <header class="dialog-heading">
+      <h2 id="cart-title">Your cart</h2>
+      <button class="close-button" type="button" data-close="cart" aria-label="Close cart" autofocus>×</button>
+    </header>
+    <div class="empty-cart" id="empty-cart">
+      <span class="empty-mark" aria-hidden="true"><span class="bag-icon"></span></span>
+      <h3>Your cart is empty</h3>
+      <p>Add a piece from the collection to see it here.</p>
+      <button class="primary" id="browse-empty" type="button">Browse the collection</button>
+    </div>
+    <div id="filled-cart" hidden>
+      <table class="cart-table">
+        <caption class="sr-only">Products in your cart with quantities and line totals</caption>
+        <thead><tr><th scope="col">Piece</th><th scope="col">Quantity</th><th scope="col">Amount</th></tr></thead>
+        <tbody id="cart-lines"></tbody>
+      </table>
+      <div id="cart-totals"></div>
+      <p class="delivery-note">Delivery is ₹40 on orders under ₹500 and free from ₹500.</p>
+      <button id="open-preview" class="primary full" type="button" aria-haspopup="dialog">Preview checkout</button>
+    </div>
+    <p id="cart-status" class="sr-only" role="status" aria-atomic="true"></p>
+  </dialog>
+
+  <dialog id="preview-dialog" aria-labelledby="preview-title" aria-describedby="demo-note">
+    <header class="dialog-heading">
+      <h2 id="preview-title">Checkout preview</h2>
+      <button class="close-button" type="button" data-close="preview" aria-label="Close checkout preview" autofocus>×</button>
+    </header>
+    <p id="demo-note" class="demo-note"><strong>Demo checkout.</strong> No payment is taken and no order is placed.</p>
+    <ul id="preview-lines" class="preview-lines" aria-label="Order items"></ul>
+    <div id="preview-totals"></div>
+    <div class="preview-actions">
+      <button class="primary" id="back-to-cart" type="button">Back to cart</button>
+      <button class="secondary" id="finish-browsing" type="button">Continue shopping</button>
+    </div>
+  </dialog>
+
+  <template id="product-template">
+    <article class="product-card">
+      <div class="product-photo" role="img"></div>
+      <div class="card-content">
+        <p class="category-label"></p>
+        <div class="product-title"><h3></h3><span class="product-price"></span></div>
+        <button type="button" class="add-button"><span class="plus-mark" aria-hidden="true"></span>Add to cart</button>
+      </div>
+    </article>
+  </template>
+  <template id="line-template">
+    <tr>
+      <th scope="row">
+        <div class="cart-product"><span class="product-photo thumbnail" aria-hidden="true"></span><div class="item-detail"><span class="item-name"></span><small class="each-price"></small><button class="remove" data-action="remove" type="button">Remove</button></div></div>
+      </th>
+      <td><div class="quantity"><button type="button" data-action="decrease">−</button><span class="qty-value"></span><button type="button" data-action="increase">+</button></div></td>
+      <td class="line-amount"></td>
+    </tr>
+  </template>
+  <template id="totals-template">
+    <dl class="totals">
+      <div><dt>Subtotal</dt><dd class="subtotal"></dd></div>
+      <div><dt>Delivery</dt><dd class="delivery"></dd></div>
+      <div class="grand"><dt>Total</dt><dd class="grand-total"></dd></div>
+    </dl>
+  </template>
+</body>
+</html>
